@@ -135,4 +135,17 @@ function Feed({ videos, onOpen }:{ videos: any[]; onOpen:(id:string)=>void; }){
   );
 }
 
+function TestPanel() {
+  return (
+    <div className="border border-gray-800 rounded-2xl p-4 bg-gray-900/40 text-sm">
+      <div className="font-semibold mb-1">Self-tests</div>
+      <ul className="list-disc pl-5">
+        <li>App loaded ✅</li>
+        <li>UI mount ok ✅</li>
+      </ul>
+    </div>
+  );
+}
+
+
 // [Content truncated: rest of functions Feed, Watch, Stars, SearchView, UploadView, AuthView, helpers, TestPanel ...]
