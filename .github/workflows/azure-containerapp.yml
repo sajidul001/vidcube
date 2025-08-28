@@ -1,39 +1,21 @@
-name: Deploy VidCube Fullstack to Azure
-
+name: Build & Push VidCube image to ACR
 on:
   push:
-    branches:
-      - main
-
+    branches: [main]
 jobs:
-  build-and-deploy:
+  build-push:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Log in to Azure
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Log in to Azure Container Registry
+      - uses: actions/checkout@v3
+      - name: Login to ACR
         uses: docker/login-action@v2
         with:
           registry: ${{ secrets.ACR_LOGIN_SERVER }}
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
-
-      - name: Build and push container
+      - name: Build & push
         uses: docker/build-push-action@v4
         with:
           context: .
           push: true
           tags: ${{ secrets.ACR_LOGIN_SERVER }}/vidcube:latest
-
-      - name: Deploy to Azure Web App (container)
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: vidcube
-          images: ${{ secrets.ACR_LOGIN_SERVER }}/vidcube:latest
