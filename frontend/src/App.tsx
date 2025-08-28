@@ -135,6 +135,18 @@ function Feed({ videos, onOpen }:{ videos: any[]; onOpen:(id:string)=>void; }){
   );
 }
 
+function timeAgo(ms: number) {
+  const s = Math.floor((Date.now() - ms) / 1000);
+  if (s < 60) return `${s}s ago`;
+  const m = Math.floor(s / 60);
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m / 60);
+  if (h < 24) return `${h}h ago`;
+  const d = Math.floor(h / 24);
+  return `${d}d ago`;
+}
+
+
 function TestPanel() {
   return (
     <div className="border border-gray-800 rounded-2xl p-4 bg-gray-900/40 text-sm">
