@@ -35,5 +35,5 @@ jobs:
       - name: Deploy to Azure Web App (container)
         uses: azure/webapps-deploy@v2
         with:
-          app-name: YOUR_WEBAPP_NAME
+          app-name: vidcube
           images: ${{ secrets.ACR_LOGIN_SERVER }}/vidcube:latest
